@@ -1,5 +1,6 @@
 namespace NodeJS{
     interface  ProcessEnv{
+        //DATABASE
         DB_PORT: number
         DB_HOST: string
         DB_NAME: string
@@ -8,5 +9,9 @@ namespace NodeJS{
 
 
         PORT:number
+
+        //TOKEN
+        ACCESS_TOKEN_SECRET:string
+        ACCESS_TOKEN_EXPIRES_IN:string
     }
 }
