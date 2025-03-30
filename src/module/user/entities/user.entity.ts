@@ -1,18 +1,19 @@
 import { BaseEntityCustom } from "src/common/abstracts/base.entity";
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from "typeorm";
-import { UserRole } from "../enums/userRole.enum";
+import { Column, CreateDateColumn, Entity, OneToMany, UpdateDateColumn } from "typeorm";
 import { EntityName } from "src/common/enums/entityName.enum";
+import { Roles } from "src/common/enums/role.enums";
+import { TaskEntity } from "src/module/task/entities/task.entity";
 @Entity(EntityName.User)
 export class UserEntity extends BaseEntityCustom {
     
-    @Column({ unique: true })
+    @Column({ unique: true, nullable:true})
     username: string;
   
-    @Column({ unique: true })
+    @Column({ unique: true,nullable:true })
     email: string;
   
     
-    @Column({ unique: true })
+    @Column({ unique: true ,nullable:true})
     phone: string;
   
     
@@ -29,10 +30,10 @@ export class UserEntity extends BaseEntityCustom {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-    role: UserRole;
+    @Column({ type: 'enum', enum: Roles, default: Roles.User })
+    role: Roles;
     
-    // @OneToMany(() => Task, (task) => task.user)
-    // tasks: Task[];
+    @OneToMany(() => TaskEntity, (task) => task.user)
+    tasks: TaskEntity[];
   }
 

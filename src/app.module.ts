@@ -5,8 +5,7 @@ import { TypeOrmConfig } from './config/typeOrm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
-import { TokenService } from './module/auth/token.service';
-import { JwtService } from '@nestjs/jwt';
+import { TaskModule } from './module/task/task.module';
 
 @Module({
   imports: [
@@ -14,6 +13,7 @@ import { JwtService } from '@nestjs/jwt';
     TypeOrmModule.forRoot(TypeOrmConfig()),
     UserModule,
     AuthModule,
+    TaskModule,
   ],
   controllers: [],
   providers: [],

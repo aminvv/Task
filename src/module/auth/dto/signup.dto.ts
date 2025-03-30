@@ -12,7 +12,7 @@ export class SignupDto {
   @Matches(/^09\d{9}$/, { message: 'Phone number must be a valid Iranian number' })
   phone?: string;
 
-  @ApiPropertyOptional({ description: 'Username' })
+  @ApiPropertyOptional({ description: 'username' })
   @IsOptional()
   @IsString()
   username?: string;
