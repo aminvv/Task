@@ -11,7 +11,7 @@ const document= new DocumentBuilder()
 .build()
 
 const swaggerDocument=SwaggerModule.createDocument(app,document)
-SwaggerModule.setup('/swagger',app,swaggerDocument) 
+SwaggerModule.setup('/swagger',app,swaggerDocument,) 
 }
 
 

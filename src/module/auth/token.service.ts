@@ -11,11 +11,20 @@ export class TokenService {
   ){}
 
    accessToken(payload:CookiePayload){
-    const token=this.jwtService.sign(payload,{
+    const accessToken=this.jwtService.sign(payload,{
       secret:process.env.ACCESS_TOKEN_SECRET,
       expiresIn:process.env.ACCESS_TOKEN_EXPIRES_IN,
     })
-    return token
+    return accessToken
+  }
+
+
+   refreshToken(payload:CookiePayload){
+    const refreshToken=this.jwtService.sign(payload,{
+      secret:process.env.REFRESH_TOKEN_SECRET,
+      expiresIn:process.env.REFRESH_TOKEN_EXPIRES_IN,
+    })
+    return refreshToken
   }
  
 
@@ -27,6 +36,17 @@ try {
   })
 } catch (error) {
   throw new UnauthorizedException("TryAgain login")
+}
+  }
+
+
+  verifyRefreshToken(token:string){
+try {
+  return this.jwtService.verify(token,{
+    secret:process.env.REFRESH_TOKEN_SECRET
+  })
+} catch (error) {
+  throw new UnauthorizedException("Invalid refresh token")
 }
   }
 

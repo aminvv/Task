@@ -25,7 +25,7 @@ import { TokenService } from "../token.service";
             throw new UnauthorizedException("tryAgain login")
          }
          const[bearer,token]=authorization.split(" ")
-         if(bearer?.toLowerCase()!=="bearer" ||!token || isJWT(token)){
+         if(bearer?.toLowerCase()!=="bearer" ||!token || !isJWT(token)){
             throw new UnauthorizedException("tryAgain login")
          }
          return token

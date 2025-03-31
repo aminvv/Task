@@ -8,5 +8,9 @@ declare global{
         }
     }
 }
+export interface CustomRequest extends Request {
+    user?: AccessTokenPayload; 
+    cookies: { [key in CookieKeys]?: string };
+  }
  
  export{}
