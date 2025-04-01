@@ -1,9 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsEmail, Matches, IsString, MinLength } from 'class-validator';
+import { ToNull } from 'src/common/decorators/toNull.decorator';
 
 export class SignupDto {
   @ApiPropertyOptional({ description: 'Email address' })
   @IsOptional()
+  @ToNull()
   @IsEmail()
   email?: string;
 

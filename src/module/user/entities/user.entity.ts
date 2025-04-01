@@ -1,8 +1,9 @@
 import { BaseEntityCustom } from "src/common/abstracts/base.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, UpdateDateColumn } from "typeorm";
 import { EntityName } from "src/common/enums/entityName.enum";
 import { Roles } from "src/common/enums/role.enums";
 import { TaskEntity } from "src/module/task/entities/task.entity";
+import { ProfileEntity } from "src/module/profile/entities/profile.entity";
 @Entity(EntityName.User)
 export class UserEntity extends BaseEntityCustom {
 
@@ -20,9 +21,12 @@ export class UserEntity extends BaseEntityCustom {
   @Column()
   password: string;
 
+  @Column({ nullable: true })
+  profileId: number;
 
   @Column({ nullable: true })
-  profileImage: string;
+  taskId: number;
+
 
   @CreateDateColumn()
   createdAt: Date;
@@ -30,7 +34,7 @@ export class UserEntity extends BaseEntityCustom {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({type: 'text' ,nullable:true}) 
+  @Column({ type: 'text', nullable: true })
   refreshToken: string | null;
 
   @Column({ type: 'enum', enum: Roles, default: Roles.User })
@@ -38,7 +42,11 @@ export class UserEntity extends BaseEntityCustom {
 
   @OneToMany(() => TaskEntity, (task) => task.user)
   tasks: TaskEntity[];
+
+  @OneToOne(() => ProfileEntity, (profile) => profile.user, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'profileId' })
+  profile: ProfileEntity;
 }
 
-
+ 
 
